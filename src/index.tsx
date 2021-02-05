@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './Components/App';
+import { Provider as ReduxProvider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import { store } from './Store';
 import { ViewerProvider } from 'use-open-seadragon';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ViewerProvider>
-      <App />
-    </ViewerProvider>
+    <ReduxProvider store={store}>
+      <ViewerProvider>
+        <App />
+      </ViewerProvider>
+    </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

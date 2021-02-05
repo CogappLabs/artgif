@@ -1,16 +1,25 @@
-import React, { FunctionComponent } from 'react';
-import { Header } from './Header';
 import './App.css';
-import { Footer } from './Footer';
+
+import React, { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
+
 import { ArtworkPanel } from './ArtworkPanel';
-import { FilmstripPanel } from './FilmstripPanel';
 import { EditorPanel } from './EditorPanel';
+import { FilmstripPanel } from './FilmstripPanel';
+import { Footer } from './Footer';
+import { Header } from './Header';
 import { OutputPanel } from './OutputPanel';
 import { Panel } from './Panel';
+import { RootState } from '../Store';
+import classNames from 'classnames';
 
 export const App: FunctionComponent = () => {
+  const darkmodeIsOn = useSelector<RootState>(({ darkmode }) => darkmode.enabled);
+
+  const classes = classNames('App', { 'is-dark': darkmodeIsOn });
+
   return (
-    <div className="App">
+    <div className={classes}>
       <Header />
       <main className="layout">
         <div className="panel-grid">
