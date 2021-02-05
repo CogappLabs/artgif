@@ -1,8 +1,25 @@
-import { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import { ImageDescriptor } from '../../Store/artworks/artworks.types';
+import { useDispatch } from 'react-redux';
+import { setActiveArtworkAction } from '../../Store/artworks';
+import { addArtworkToLightboxAction } from '../../Store/artworks';
 
 export interface ArtworkPanelProps {}
 
 export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
+    const dispatch = useDispatch();
+
+    const imageClickHandler = (item: ImageDescriptor, src: string) => {
+
+        // TODO more and better properties
+        let artwork = {
+            imageUrl: src,
+            uuid: 'abc',
+        };
+
+        dispatch(addArtworkToLightboxAction(artwork));
+        dispatch(setActiveArtworkAction(artwork));
+    }
 
     const perPage = 40;
     // TODO query the exact number, but for now hardcode public domain images as 55k
@@ -84,7 +101,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
             {images.map((item) => {
                 let src = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/full/!40,40/0/default.jpg';
 
-              return (<img src={src} title={item['title']} alt={item['title']} key={src} width="40" height="40" />)
+              return (<img src={src} title={item['title']} alt={item['title']} key={src} onClick={() => imageClickHandler(item, src)} width="40" height="40"  />)
                         })}
             </div>
         </div>
