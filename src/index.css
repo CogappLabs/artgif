@@ -1,13 +1,89 @@
+:root {
+  /* Palette */
+  --off-black: #333;
+  --off-white: #eee;
+  --primary-color: #219ebc;
+  --primary-color-dark: #023047;
+  --primary-color-light: #8ecae6;
+  --secondary-color: #ffb703;
+  --secondary-color-dark: #fb8500;
+  /* UI colours */
+  --background-color: var(--off-white);
+  --foreground-color: var(--primary-color-dark);
+}
+
+/* Dark mode */
+.is-dark {
+  --background-color: #333;
+  --foreground-color: var(--off-white);
+}
+
+html {
+  font-size: 1.125rem;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  color: var(--foreground-color);
+  background-color: var(--background-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Quicksand', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+::-moz-selection {
+  background: var(--secondary-color-dark);
+  color: white;
+}
+::selection {
+  background: var(--secondary-color-dark);
+  color: white;
+}
+
+/* Utility classes */
+.font-lora {
+  font-family: Lora, serif;
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* Link styles */
+a {
+  color: currentColor;
+  text-decoration-color: var(--primary-color);
+  text-decoration-thickness: 0.1em;
+}
+
+.is-dark .fancy-link {
+  color: #eee;
+}
+.fancy-link {
+  color: currentColor;
+  text-decoration: none;
+  position: relative;
+  font-weight: 700;
+}
+
+.fancy-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  background-color: var(--secondary-color);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform: skewY(-2deg);
+  opacity: 0.6;
+}
+
+.fancy-link:focus::before,
+.fancy-link:hover::before {
+  transform: skewY(2deg);
+  transition: all 0.2s;
+  background-color: var(--primary-color-light);
 }
