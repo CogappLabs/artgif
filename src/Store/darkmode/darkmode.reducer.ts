@@ -8,10 +8,8 @@ export const darkModeReducer = (state = initialState, action: DarkModeActionType
   switch (action.type) {
     case TOGGLE_DARK_MODE:
       return {
-        ...{
-          enabled: action.newStatus,
-        },
         ...state,
+        enabled: action.newStatus,
       };
     default:
       return state;

@@ -4,6 +4,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: var(--foreground-color);
+  background-color: var(--background-color);
 }
 
 .App main {

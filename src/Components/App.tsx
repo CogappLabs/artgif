@@ -11,11 +11,15 @@ import { Header } from './Header';
 import { OutputPanel } from './OutputPanel';
 import { Panel } from './Panel';
 import { RootState } from '../Store';
+import classNames from 'classnames';
 
 export const App: FunctionComponent = () => {
-  const darkmode = useSelector<RootState>(({ darkmode }) => darkmode.enabled);
+  const darkmodeIsOn = useSelector<RootState>(({ darkmode }) => darkmode.enabled);
+
+  const classes = classNames('App', { 'is-dark': darkmodeIsOn });
+
   return (
-    <div className="App">
+    <div className={classes}>
       <Header />
       <main className="layout">
         <div className="panel-grid">

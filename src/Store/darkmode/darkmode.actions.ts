@@ -1,6 +1,6 @@
-import { DarkModeActionTypes, DarkModeState, TOGGLE_DARK_MODE } from './darkmode.types';
+import { DarkModeActionTypes, TOGGLE_DARK_MODE } from './darkmode.types';
 
-export const toggleDarkMode = (newStatus: boolean): DarkModeActionTypes => {
+export const toggleDarkModeAction = (newStatus: boolean): DarkModeActionTypes => {
   return {
     type: TOGGLE_DARK_MODE,
     newStatus,
