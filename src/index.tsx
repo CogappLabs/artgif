@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './Components/App';
 import reportWebVitals from './reportWebVitals';
-import {ViewerProvider} from "use-open-seadragon";
+import { ViewerProvider } from 'use-open-seadragon';
 
 ReactDOM.render(
   <React.StrictMode>
     <ViewerProvider>
-        <App />
+      <App />
     </ViewerProvider>
   </React.StrictMode>,
   document.getElementById('root')
