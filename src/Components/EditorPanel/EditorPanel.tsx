@@ -1,6 +1,8 @@
 import { FunctionComponent, useState } from 'react';
 import { ComplexTileSource } from 'use-open-seadragon/lib/types/tile-sources/complex-tile-source';
 import { useOpenSeadragon, useViewerEvent } from 'use-open-seadragon';
+import {useTypedSelector} from "../../Store";
+import {ImageDescriptor} from "../../Store/artworks";
 
 export interface EditorPanelProps {}
 
@@ -32,11 +34,23 @@ const Viewer = ({ tiles }: ComplexTileSource) => {
 };
 
 export const EditorPanel: FunctionComponent<EditorPanelProps> = () => {
-  const tiles: ComplexTileSource = [
+  const selectedArtwork = useTypedSelector<ImageDescriptor|undefined>(({ artworks }) => artworks.activeArtwork);
+  console.log('selected', selectedArtwork);
+
+  let tiles: ComplexTileSource = [
     {
       tileSource: 'https://lakeimagesweb.artic.edu/iiif/2/25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e/info.json',
     },
   ];
+
+  if (selectedArtwork?.tileSource !== undefined) {
+     tiles = [
+      {
+        tileSource: selectedArtwork?.tileSource,
+      },
+    ];
+
+  }
 
   return <Viewer tiles={tiles} />;
 };

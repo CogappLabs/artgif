@@ -5,6 +5,9 @@ export const SET_ACTIVE_ARTWORK = 'SET_ACTIVE_ARTWORK';
 export interface ImageDescriptor {
   uuid: string;
   imageUrl: string;
+  caption?: string,
+  tileSource?: string;
+  crop?: {x: 0, y: 0, width:0, height:0};
 }
 
 export interface ArtworkState {

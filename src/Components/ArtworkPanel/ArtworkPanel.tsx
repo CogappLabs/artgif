@@ -3,18 +3,21 @@ import { ImageDescriptor } from '../../Store/artworks/artworks.types';
 import { useDispatch } from 'react-redux';
 import { setActiveArtworkAction } from '../../Store/artworks';
 import { addArtworkToLightboxAction } from '../../Store/artworks';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ArtworkPanelProps {}
 
 export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
     const dispatch = useDispatch();
 
-    const imageClickHandler = (item: ImageDescriptor, src: string) => {
+    const imageClickHandler = (item: any, src: string) => {
 
         // TODO more and better properties
-        let artwork = {
+        const artwork:ImageDescriptor = {
             imageUrl: src,
-            uuid: 'abc',
+            uuid: uuidv4(),
+            caption: item['title'],
+            tileSource: `https://lakeimagesweb.artic.edu/iiif/2/${item['image_id']}/info.json`
         };
 
         dispatch(addArtworkToLightboxAction(artwork));
@@ -99,9 +102,9 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
             </label>
             <div className="image-grid">
             {images.map((item) => {
-                let src = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/full/!40,40/0/default.jpg';
+                let src = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/full/!200,200/0/default.jpg';
 
-              return (<img src={src} title={item['title']} alt={item['title']} key={src} onClick={() => imageClickHandler(item, src)} width="40" height="40"  />)
+              return (<img src={src} title={item['title']} alt={item['title']} key={src} onClick={() => imageClickHandler(item, src)} width="200" height="200"  />)
                         })}
             </div>
         </div>
