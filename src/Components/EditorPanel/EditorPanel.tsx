@@ -1,24 +1,32 @@
 import { FunctionComponent, useState } from 'react';
 import { ComplexTileSource } from 'use-open-seadragon/lib/types/tile-sources/complex-tile-source';
-import { useOpenSeadragon, Overlay } from 'use-open-seadragon';
+import { useOpenSeadragon, Overlay, useViewerEvent } from 'use-open-seadragon';
 
 export interface EditorPanelProps {}
 
 const Viewer = ({ tiles }: ComplexTileSource) => {
   const [ref] = useOpenSeadragon(tiles);
-  const [count, setCount] = useState(0);
+  const [crop, setCrop] = useState({x: 0, y: 0, width:0, height:0});
+  const [image, setImage] = useState(tiles[0].tileSource.slice(0, -10) + '/full/!200,200/0/default.jpg');
+
+  useViewerEvent("update-viewport", ev => {
+
+    // Convert from viewport coordinates to image coordinates.
+    let imageRect = ev.eventSource.viewport.viewportToImageRectangle(ev.eventSource.viewport.getBoundsNoRotate());
+    // console.log(imageRect);
+    setCrop(imageRect);
+
+    let newSrc= tiles[0].tileSource.slice(0, -10) + '/' + crop.x + ',' + crop.y + ',' + crop.width + ',' + crop.height + '/!200,200/0/default.jpg'
+    setImage(newSrc);
+
+  });
 
   return (
     <>
-      <div ref={ref} style={{ height: 600, width: 800, position: 'relative' }}>
-        <Overlay x={0.5} y={0.5}>
-          <div style={{ background: '#fff' }}>
-            <h1>Hello overlay</h1>
-            <p>State works too: {count}</p>
-          </div>
-        </Overlay>
-      </div>
-      <button onClick={() => setCount((c) => c + 1)}>incr counter</button>
+      <div ref={ref} style={{ height: 400, width: 400, position: 'relative' }} />
+      <p>Debug:
+      <img src={image} alt="" />
+      </p>
     </>
   );
 };
