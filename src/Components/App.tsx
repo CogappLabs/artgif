@@ -10,11 +10,11 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { OutputPanel } from './OutputPanel';
 import { Panel } from './Panel';
-import { RootState } from '../Store';
+import { useTypedSelector } from '../Store';
 import classNames from 'classnames';
 
 export const App: FunctionComponent = () => {
-  const darkmodeIsOn = useSelector<RootState>(({ darkmode }) => darkmode.enabled);
+  const darkmodeIsOn = useTypedSelector<boolean>(({ darkmode }) => darkmode.enabled);
 
   const classes = classNames('App', { 'is-dark': darkmodeIsOn });
 
