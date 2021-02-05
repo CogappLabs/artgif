@@ -1,7 +1,11 @@
 import { FunctionComponent } from 'react';
+import { useTypedSelector } from '../../Store';
+import { GifShot } from './GifShot';
 
 export interface OutputPanelProps {}
 
 export const OutputPanel: FunctionComponent<OutputPanelProps> = () => {
-  return <h1>Output area</h1>;
+  const lightboxImages = useTypedSelector(({ artworks }) => artworks.lightbox);
+
+  return <GifShot images={lightboxImages} />;
 };

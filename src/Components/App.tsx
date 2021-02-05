@@ -1,7 +1,6 @@
 import './App.css';
 
 import React, { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ArtworkPanel } from './ArtworkPanel';
 import { EditorPanel } from './EditorPanel';

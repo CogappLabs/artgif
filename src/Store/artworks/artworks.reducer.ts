@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import {
   ADD_ARTWORK_TO_LIGHTBOX,
   ArtworkActionTypes,
