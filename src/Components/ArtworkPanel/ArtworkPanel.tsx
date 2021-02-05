@@ -34,7 +34,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
 
   useEffect(() => {
     getImages();
-  }, []);
+  });
 
   const getRandomImages = async () => {
     setQuery('');
@@ -88,7 +88,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
       '&fields=id,title,image_id';
     const response = await fetch(url);
     let data = await response.json();
-    console.log('Geting ' + perPage + ' results ' + 'for query ' + query + ' at page ' + pageNo);
+
     // console.log('API data', data)
     setImages(data.data);
   };
