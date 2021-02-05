@@ -7,8 +7,15 @@ export const Footer: FunctionComponent = () => {
     <footer className="site-footer" role="contentinfo">
       Made with ❤️
       <VisuallyHidden text="love" /> and 🍕
-      <VisuallyHidden text="pizza" /> by <a href="https://www.cogapp.com/">Cogapp</a>. With thanks to{' '}
-      <a href="https://www.artic.edu/visit">The Art Institute of Chicago</a> for providing content and APIs.
+      <VisuallyHidden text="pizza" /> by{' '}
+      <a className="fancy-link" href="https://www.cogapp.com/">
+        Cogapp
+      </a>
+      , with thanks to{' '}
+      <a className="fancy-link" href="https://www.artic.edu/visit">
+        The Art Institute of Chicago
+      </a>{' '}
+      for providing content and APIs.
     </footer>
   );
 };
