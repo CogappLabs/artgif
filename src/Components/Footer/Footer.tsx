@@ -12,7 +12,7 @@ export const Footer: FunctionComponent = () => {
         Cogapp
       </a>
       , with thanks to{' '}
-      <a className="fancy-link" href="https://www.artic.edu/visit">
+      <a className="fancy-link" href="https://www.artic.edu/">
         The Art Institute of Chicago
       </a>{' '}
       for providing content and APIs.
