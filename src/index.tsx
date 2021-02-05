@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './Components/App';
+import { Provider as ReduxProvider, useSelector } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import { store } from './Store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ReduxProvider store={store}>
+      <App />
+    </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
