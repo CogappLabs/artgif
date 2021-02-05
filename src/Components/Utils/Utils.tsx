@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-
+import './Utils.css';
 export interface VisuallyHiddenProps {
   text: string;
 }

@@ -30,7 +30,7 @@
 }
 
 .site-header .site-logo:hover .site-logo__paint {
-  animation: 5s linear 0s infinite alternate animate-paint;
+  animation: 3s linear 0s infinite alternate animate-paint;
 }
 
 @keyframes animate-brush {
@@ -48,19 +48,23 @@
     fill: currentColor;
   }
 
+  15% {
+    fill: #00ffcd;
+  }
+
   20% {
-    fill: #f5b700;
+    fill: #ff3800;
   }
 
   40% {
-    fill: #00a1e4;
+    fill: #ff1dce;
   }
 
   60% {
-    fill: #dc0073;
+    fill: #ff8c00;
   }
 
   80% {
-    fill: #89fc00;
+    fill: #7f00ff;
   }
 }

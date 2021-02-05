@@ -1,9 +1,21 @@
 :root {
+  /* Palette */
+  --off-black: #333;
+  --off-white: #eee;
   --primary-color: #219ebc;
   --primary-color-dark: #023047;
   --primary-color-light: #8ecae6;
   --secondary-color: #ffb703;
   --secondary-color-dark: #fb8500;
+  /* UI colours */
+  --background-color: var(--off-white);
+  --foreground-color: var(--primary-color-dark);
+}
+
+/* Dark mode */
+.is-dark {
+  --background-color: #333;
+  --foreground-color: var(--off-white);
 }
 
 html {
@@ -11,8 +23,8 @@ html {
 }
 
 body {
-  color: var(--primary-color-dark);
-  background-color: #eee;
+  color: var(--foreground-color);
+  background-color: var(--background-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Quicksand', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
@@ -20,6 +32,15 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+::-moz-selection {
+  background: var(--secondary-color-dark);
+  color: white;
+}
+::selection {
+  background: var(--secondary-color-dark);
+  color: white;
 }
 
 /* Utility classes */
@@ -31,16 +52,6 @@ code {
   text-align: center;
 }
 
-.visually-hidden:not(:focus):not(:active) {
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-}
-
 /* Link styles */
 a {
   color: currentColor;
@@ -48,6 +59,9 @@ a {
   text-decoration-thickness: 0.1em;
 }
 
+.is-dark .fancy-link {
+  color: #eee;
+}
 .fancy-link {
   color: currentColor;
   text-decoration: none;
