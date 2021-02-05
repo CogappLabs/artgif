@@ -1,3 +1,5 @@
+/* Application layout */
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -6,4 +8,57 @@
 
 .App main {
   flex-grow: 1;
+}
+
+/* Main content layout */
+.layout {
+  display: flex;
+}
+
+/* Panel grid */
+.panel-grid {
+  display: grid;
+  grid-template-columns: minmax(20ch, 40ch) auto minmax(20ch, 40ch);
+  gap: 1rem;
+  max-width: 95vw;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.panel-grid .panel--artworks {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.panel-grid .panel--filmstrip {
+  grid-column: 2;
+}
+
+.panel-grid .panel--editor {
+  grid-column: 2;
+}
+
+.panel-grid .panel--output {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+}
+
+/* Panel styles */
+.panel {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.8rem;
+
+  --inner-padding: 0.8rem;
+}
+
+.panel__title {
+  font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+  border-bottom: 1px solid #ccc;
+  line-height: 1;
+  padding-bottom: var(--inner-padding);
+}
+
+.panel__content {
+  padding-top: var(--inner-padding);
 }
