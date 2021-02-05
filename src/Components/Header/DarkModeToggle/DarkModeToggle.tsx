@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../Store';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../../Store';
 import { toggleDarkModeAction } from '../../../Store/darkmode';
 import './DarkModeToggle.css';
 import { ReactComponent as Bulb } from './bulb.svg';
@@ -9,7 +9,8 @@ export interface DarkModeToggleProps {}
 export type DarkModeToggleFC = React.FC<DarkModeToggleProps>;
 
 export const DarkModeToggle: DarkModeToggleFC = () => {
-  const isDark = useSelector<RootState, boolean>(({ darkmode }) => darkmode.enabled);
+  const isDark = useTypedSelector<boolean>(({ darkmode }) => darkmode.enabled);
+
   const dispatch = useDispatch();
 
   const handleChange = () => dispatch(toggleDarkModeAction(!isDark));
