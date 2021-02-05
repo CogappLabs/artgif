@@ -18,7 +18,7 @@
 /* Panel grid */
 .panel-grid {
   display: grid;
-  grid-template-columns: minmax(20ch, 40ch) auto minmax(20ch, 40ch);
+  grid-template-columns: 20% auto 25%;
   gap: 1rem;
   max-width: 95vw;
   width: 100%;

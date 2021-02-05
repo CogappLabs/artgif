@@ -1,3 +1,66 @@
 .site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1.2rem;
+}
+
+.site-header__logo {
+  height: 3rem;
+  margin-inline-start: 1rem;
+}
+
+.site-header .site-logo {
+  fill: currentColor;
+}
+
+.site-logo__brush {
+  position: relative;
+  z-index: 1;
+}
+
+.site-logo__paint {
+  position: relative;
+  z-index: 0;
+}
+
+.site-header .site-logo:hover .site-logo__brush {
+  transform-origin: top right;
+  animation: 0.4s linear 0s infinite alternate animate-brush;
+}
+
+.site-header .site-logo:hover .site-logo__paint {
+  animation: 5s linear 0s infinite alternate animate-paint;
+}
+
+@keyframes animate-brush {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes animate-paint {
+  0% {
+    fill: currentColor;
+  }
+
+  20% {
+    fill: #f5b700;
+  }
+
+  40% {
+    fill: #00a1e4;
+  }
+
+  60% {
+    fill: #dc0073;
+  }
+
+  80% {
+    fill: #89fc00;
+  }
 }
