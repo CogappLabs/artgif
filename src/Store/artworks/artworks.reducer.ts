@@ -34,7 +34,6 @@ const dummyArtworks: ImageDescriptor[] = [
 // ToDo: Change this when we have some real artworks.
 const intialState: ArtworkState = {
   activeArtwork: undefined,
-  allArtworks: dummyArtworks,
   lightbox: dummyArtworks.filter((art) => art.uuid !== 'ghi'),
 };
 

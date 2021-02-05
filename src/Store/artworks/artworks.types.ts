@@ -9,7 +9,6 @@ export interface ImageDescriptor {
 
 export interface ArtworkState {
   activeArtwork?: ImageDescriptor;
-  allArtworks: ImageDescriptor[];
   lightbox: ImageDescriptor[];
 }
 
