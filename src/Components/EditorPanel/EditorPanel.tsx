@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { ComplexTileSource } from 'use-open-seadragon/lib/types/tile-sources/complex-tile-source';
-import { useOpenSeadragon, Overlay, useViewerEvent } from 'use-open-seadragon';
+import { useOpenSeadragon, useViewerEvent } from 'use-open-seadragon';
 
 export interface EditorPanelProps {}
 
