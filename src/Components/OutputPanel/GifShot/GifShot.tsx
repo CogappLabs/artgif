@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageDescriptor } from '../../../Store/artworks';
 import gifshot from 'gifshot';
 import { useState } from 'react';
-
+import './GifShot.css';
 export interface GifShotProps {
   images: ImageDescriptor[];
   width?: number;
