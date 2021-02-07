@@ -8,6 +8,7 @@ export interface ImageDescriptor {
   caption?: string,
   tileSource?: string;
   crop?: {x: 0, y: 0, width:0, height:0};
+  objectID?: number;
 }
 
 export interface ArtworkState {

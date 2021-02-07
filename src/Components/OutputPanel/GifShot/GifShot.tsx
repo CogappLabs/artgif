@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageDescriptor } from '../../../Store/artworks';
+import {ImageDescriptor, removeArtworkFromLightboxAction} from '../../../Store/artworks';
 import gifshot from 'gifshot';
 import { useState } from 'react';
 import './GifShot.css';
@@ -22,7 +22,7 @@ export const GifShot: GifShotFC = ({ images, ...props }) => {
       images: images.map((image) => image.imageUrl),
       width: props.width ?? 200,
       height: props.height ?? 200,
-      interval: props.interval ?? 1,
+      interval: props.interval ?? 0.5,
       frameDuration: props.frameDuration ?? 1,
       numFrames: props.numFrames ?? 10,
     },
@@ -32,9 +32,19 @@ export const GifShot: GifShotFC = ({ images, ...props }) => {
       }
     }
   );
-  return (
+
+    const changeSpeed = (increment: number) => {
+        if (props.interval) props.interval += increment;
+        console.log('interval', props.interval)
+    }
+
+    return (
     <div className="gifshot">
       <img src={imageString} alt="" />
+      <div>
+          <button onClick={() => changeSpeed(-0.05)}>Faster</button>
+          <button onClick={() => changeSpeed(+0.05)}>Slower</button>
+      </div>
     </div>
   );
 };

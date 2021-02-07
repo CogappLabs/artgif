@@ -18,7 +18,8 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
             imageUrl: src,
             uuid: uuidv4(),
             caption: item['title'],
-            tileSource: `https://lakeimagesweb.artic.edu/iiif/2/${item['image_id']}/info.json`
+            tileSource: `https://lakeimagesweb.artic.edu/iiif/2/${item['image_id']}/info.json`,
+            objectID: item['id']
         };
 
     dispatch(addArtworkToLightboxAction(artwork));
@@ -89,7 +90,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
       perPage +
       '&page=' +
       pageNo +
-      '&fields=id,title,image_id';
+      '&fields=id,title,image_id,artist_display';
     const response = await fetch(url);
     let data = await response.json();
 
@@ -106,13 +107,13 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
       </label>
       <div className="image-grid">
         {images.map((item) => {
-          let src = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/full/!100,100/0/default.jpg';
+          let src = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/full/!200,200/0/default.jpg';
 
           return (
             <img
               className="artwork-preview"
               src={src}
-              title={item['title']}
+              title={item['title'] + ", " + item['artist_display']}
               alt={item['title']}
               key={src}
               onClick={() => imageClickHandler(item, src)}

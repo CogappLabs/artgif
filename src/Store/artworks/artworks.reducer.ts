@@ -33,7 +33,7 @@ const dummyArtworks: ImageDescriptor[] = [
 // ToDo: Change this when we have some real artworks.
 const intialState: ArtworkState = {
   activeArtwork: undefined,
-  lightbox: dummyArtworks.filter((art) => art.uuid !== 'ghi'),
+  lightbox: [],
 };
 
 export const artworkReducer = (state = intialState, action: ArtworkActionTypes): ArtworkState => {
