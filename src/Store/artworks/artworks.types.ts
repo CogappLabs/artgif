@@ -1,3 +1,5 @@
+import { Rect } from "use-open-seadragon/lib/types/rect";
+
 export const ADD_ARTWORK_TO_LIGHTBOX = 'ADD_ARTWORK_TO_LIGHTBOX';
 export const REMOVE_ARTWORK_FROM_LIGHTBOX = 'REMOVE_ARTWORK_FROM_LIGHTBOX';
 export const SET_ACTIVE_ARTWORK = 'SET_ACTIVE_ARTWORK';
@@ -7,7 +9,7 @@ export interface ImageDescriptor {
   imageUrl: string;
   caption?: string,
   tileSource?: string;
-  crop?: {x: 0, y: 0, width:0, height:0};
+  crop?: Rect;
   objectID?: number;
 }
 

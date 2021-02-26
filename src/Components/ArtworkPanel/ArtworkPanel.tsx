@@ -1,5 +1,6 @@
 import { FunctionComponent, useState, useEffect } from 'react';
 import { ImageDescriptor } from '../../Store/artworks/artworks.types';
+import { OpenSeadragon } from 'use-open-seadragon';
 import { useDispatch } from 'react-redux';
 import { setActiveArtworkAction } from '../../Store/artworks';
 import { addArtworkToLightboxAction } from '../../Store/artworks';
@@ -9,18 +10,28 @@ import './ArtworkPanel.css';
 export interface ArtworkPanelProps {}
 
 export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const imageClickHandler = (item: any, src: string) => {
+  const imageClickHandler = (item: any) => {
 
-        // TODO more and better properties
-        const artwork:ImageDescriptor = {
-            imageUrl: src,
-            uuid: uuidv4(),
-            caption: item['title'],
-            tileSource: `https://lakeimagesweb.artic.edu/iiif/2/${item['image_id']}/info.json`,
-            objectID: item['id']
-        };
+    // define initial crop as full width or height
+    let thumb = item['thumbnail'];
+    let edge = thumb['height'];
+    if (thumb['height'] > thumb['width']) {
+      // console.log('portrait');
+      edge = thumb['width'];
+    }
+    let crop = new OpenSeadragon.Rect(0, 0, edge, edge);
+    let squaresrc = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/0,0,' + edge + ',' + edge + '/!200,200/0/default.jpg';
+
+    const artwork: ImageDescriptor = {
+      imageUrl: squaresrc,
+      uuid: uuidv4(),
+      caption: item['title'] + ', ' + item['artist_display'],
+      tileSource: `https://lakeimagesweb.artic.edu/iiif/2/${item['image_id']}/info.json`,
+      objectID: item['id'],
+      crop: crop,
+    };
 
     dispatch(addArtworkToLightboxAction(artwork));
     dispatch(setActiveArtworkAction(artwork));
@@ -39,7 +50,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
 
   useEffect(() => {
     getImages();
-  });
+  }, []);
 
   const getRandomImages = async () => {
     setQuery('');
@@ -47,30 +58,16 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
     getImages();
   };
 
-  const getRandomSearch = async () => {
+  const searchHandler = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    setpageNo(1);
+    getImages();
+  };
+
+  const getRandomSearch = () => {
     let terms = [
-      'joy',
-      'yellow',
-      'earth',
-      'bed',
-      'sculpture',
-      'orchard',
-      'prayer',
-      'shadow',
-      'flower',
-      'levitation',
-      'disguise',
-      'pole',
-      'dog',
-      'chest',
-      'boat',
-      'angel',
-      'fruit',
-      'war',
-      'mask',
-      'bag',
-      'cottage',
-      'frog',
+      'joy', 'yellow', 'earth', 'bed', 'sculpture', 'orchard', 'prayer', 'shadow', 'flower', 'levitation', 'disguise',
+      'pole', 'dog', 'chest', 'boat', 'angel', 'fruit', 'war', 'mask', 'bag', 'cottage', 'frog', 'coin', 'horse',
     ];
     setQuery(terms[Math.floor(Math.random() * terms.length)]);
     setpageNo(1);
@@ -90,11 +87,17 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
       perPage +
       '&page=' +
       pageNo +
-      '&fields=id,title,image_id,artist_display';
+      '&fields=id,title,image_id,artist_display,thumbnail.width,thumbnail.height';
     const response = await fetch(url);
     let data = await response.json();
 
     // console.log('API data', data)
+    if (images.length === 0) {
+      // set first three images as sample data
+      imageClickHandler(data.data[0]);
+      imageClickHandler(data.data[1]);
+      imageClickHandler(data.data[2]);
+    }
     setImages(data.data);
   };
 
@@ -102,9 +105,13 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
     <div className="wrapper">
       <button onClick={getRandomImages}>Random images!</button>
       <button onClick={getRandomSearch}>Random search!</button>
-      <label>
-        <input type="text" value={query} />
-      </label>
+      <form onSubmit={searchHandler}>
+        <label>
+          Search:
+          <input type="text" value={query} onChange={e => setQuery(e.target.value)}/>
+        </label>
+        <input type="submit" value="Search"/>
+      </form>
       <div className="image-grid">
         {images.map((item) => {
           let src = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/full/!200,200/0/default.jpg';
@@ -116,7 +123,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
               title={item['title'] + ", " + item['artist_display']}
               alt={item['title']}
               key={src}
-              onClick={() => imageClickHandler(item, src)}
+              onClick={() => imageClickHandler(item)}
             />
           );
         })}
