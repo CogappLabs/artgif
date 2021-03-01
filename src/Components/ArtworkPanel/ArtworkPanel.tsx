@@ -136,10 +136,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
         <button onClick={getRandomSearch}>Random search!</button>
       </div>
       <form onSubmit={searchHandler}>
-        <label>
-          Search:
-          <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
-        </label>
+        <input aria-label="Search" name="search" type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
         <input type="submit" value="Search" />
       </form>
       <div className="image-grid">
