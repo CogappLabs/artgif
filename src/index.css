@@ -87,3 +87,33 @@ a {
   transition: all 0.2s;
   background-color: var(--primary-color-light);
 }
+
+/* Form styles */
+button,
+input[type='submit'] {
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid var(--foreground-color);
+  border-radius: 0.2rem;
+}
+
+.button-group {
+  display: flex;
+}
+
+.button-group > * + * {
+  margin-left: 1rem;
+}
+
+/* Layout */
+.stack {
+  --stack-space: 1rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.stack > * + * {
+  margin-top: 1rem;
+  margin-top: var(--stack-space);
+}

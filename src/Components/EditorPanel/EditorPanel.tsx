@@ -1,15 +1,15 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { ComplexTileSource } from 'use-open-seadragon/lib/types/tile-sources/complex-tile-source';
 import { OpenSeadragon, useOpenSeadragon, useViewerEvent, useViewerContext } from 'use-open-seadragon';
-import { useTypedSelector } from "../../Store";
+import { useTypedSelector } from '../../Store';
 import {
   ImageDescriptor,
   setActiveArtworkAction,
   addArtworkToLightboxAction,
-  removeArtworkFromLightboxAction
-} from "../../Store/artworks";
-import { useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+  removeArtworkFromLightboxAction,
+} from '../../Store/artworks';
+import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface EditorPanelProps {}
 
@@ -53,10 +53,9 @@ const Viewer = ({ tiles }: ComplexTileSource) => {
 
   const deleteHandler = () => {
     if (selectedArtwork) dispatch(removeArtworkFromLightboxAction(selectedArtwork));
-  }
+  };
 
-  useViewerEvent("update-viewport", ev => {
-
+  useViewerEvent('update-viewport', (ev) => {
     // Convert from viewport coordinates to image coordinates.
     let imageRect = ev.eventSource.viewport.viewportToImageRectangle(ev.eventSource.viewport.getBoundsNoRotate());
     console.log('rect', imageRect);
@@ -68,7 +67,7 @@ const Viewer = ({ tiles }: ComplexTileSource) => {
     let w = crop.width >= 0 ? crop.width : 0;
     let h = crop.height >= 0 ? crop.height : 0;
 
-    let newSrc = tiles[0].tileSource.slice(0, -10) + '/' + x + ',' + y + ',' + w + ',' + h + '/!200,200/0/default.jpg'
+    let newSrc = tiles[0].tileSource.slice(0, -10) + '/' + x + ',' + y + ',' + w + ',' + h + '/!200,200/0/default.jpg';
     setImage(newSrc);
     // TODO Matt: make this update the image in the lightbox too
   });
@@ -95,13 +94,11 @@ const Viewer = ({ tiles }: ComplexTileSource) => {
   */
 
   return (
-    <>
-      <div ref={ref} style={{ height: 400, width: 400, position: 'relative' }}/>
+    <div className="stack">
+      <div ref={ref} style={{ height: 400, width: 400, position: 'relative' }} />
       <div className="caption">{selectedArtwork?.caption}</div>
-      <div>
+      <div className="button-group">
         <button onClick={() => addHandler(selectedArtwork)}>Add as new frame</button>
-      </div>
-      <div>
         <button onClick={() => deleteHandler()}>Remove current frame</button>
       </div>
       {/*
@@ -110,7 +107,7 @@ const Viewer = ({ tiles }: ComplexTileSource) => {
       <img src={image} alt="" />
       </p>
       */}
-    </>
+    </div>
   );
 };
 
@@ -130,8 +127,7 @@ export const EditorPanel: FunctionComponent<EditorPanelProps> = () => {
         tileSource: selectedArtwork?.tileSource,
       },
     ];
-
   }
 
-  return <Viewer tiles={tiles}/>;
+  return <Viewer tiles={tiles} />;
 };

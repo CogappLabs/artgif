@@ -7,6 +7,7 @@ export interface FilmstripPanelProps {}
 
 export const FilmstripPanel: FunctionComponent<FilmstripPanelProps> = () => {
   const lightboxArtworks = useTypedSelector<ImageDescriptor[]>(({ artworks }) => artworks.lightbox);
+  const activeArtwork = useTypedSelector<ImageDescriptor | undefined>(({ artworks }) => artworks.activeArtwork);
 
-  return <Lightbox artworks={lightboxArtworks} />;
+  return <Lightbox artworks={lightboxArtworks} activeArtwork={activeArtwork} />;
 };

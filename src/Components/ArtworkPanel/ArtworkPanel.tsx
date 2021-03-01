@@ -13,7 +13,6 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
   const dispatch = useDispatch();
 
   const imageClickHandler = (item: any) => {
-
     // define initial crop as full width or height
     let thumb = item['thumbnail'];
     let edge = thumb['height'];
@@ -22,7 +21,14 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
       edge = thumb['width'];
     }
     let crop = new OpenSeadragon.Rect(0, 0, edge, edge);
-    let squaresrc = 'https://lakeimagesweb.artic.edu/iiif/2/' + item['image_id'] + '/0,0,' + edge + ',' + edge + '/!200,200/0/default.jpg';
+    let squaresrc =
+      'https://lakeimagesweb.artic.edu/iiif/2/' +
+      item['image_id'] +
+      '/0,0,' +
+      edge +
+      ',' +
+      edge +
+      '/!200,200/0/default.jpg';
 
     const artwork: ImageDescriptor = {
       imageUrl: squaresrc,
@@ -66,8 +72,30 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
 
   const getRandomSearch = () => {
     let terms = [
-      'joy', 'yellow', 'earth', 'bed', 'sculpture', 'orchard', 'prayer', 'shadow', 'flower', 'levitation', 'disguise',
-      'pole', 'dog', 'chest', 'boat', 'angel', 'fruit', 'war', 'mask', 'bag', 'cottage', 'frog', 'coin', 'horse',
+      'joy',
+      'yellow',
+      'earth',
+      'bed',
+      'sculpture',
+      'orchard',
+      'prayer',
+      'shadow',
+      'flower',
+      'levitation',
+      'disguise',
+      'pole',
+      'dog',
+      'chest',
+      'boat',
+      'angel',
+      'fruit',
+      'war',
+      'mask',
+      'bag',
+      'cottage',
+      'frog',
+      'coin',
+      'horse',
     ];
     setQuery(terms[Math.floor(Math.random() * terms.length)]);
     setpageNo(1);
@@ -102,15 +130,17 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
   };
 
   return (
-    <div className="wrapper">
-      <button onClick={getRandomImages}>Random images!</button>
-      <button onClick={getRandomSearch}>Random search!</button>
+    <div className="wrapper stack">
+      <div className="button-group">
+        <button onClick={getRandomImages}>Random images!</button>
+        <button onClick={getRandomSearch}>Random search!</button>
+      </div>
       <form onSubmit={searchHandler}>
         <label>
           Search:
-          <input type="text" value={query} onChange={e => setQuery(e.target.value)}/>
+          <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
         </label>
-        <input type="submit" value="Search"/>
+        <input type="submit" value="Search" />
       </form>
       <div className="image-grid">
         {images.map((item) => {
@@ -120,7 +150,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
             <img
               className="artwork-preview"
               src={src}
-              title={item['title'] + ", " + item['artist_display']}
+              title={item['title'] + ', ' + item['artist_display']}
               alt={item['title']}
               key={src}
               onClick={() => imageClickHandler(item)}

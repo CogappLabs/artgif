@@ -6,8 +6,19 @@
   margin-left: 1rem;
 }
 
-.lightbox img {
+.lightbox-image {
   width: 6rem;
   height: 6rem;
   border: 0.1rem dotted var(--foreground-color);
+  opacity: 0.4;
+}
+
+.lightbox-image.is-active {
+  border: 0.2rem dotted var(--secondary-color-dark);
+}
+
+.lightbox-image.is-active,
+.lightbox-image:hover,
+.lightbox-image:focus {
+  opacity: 1;
 }
