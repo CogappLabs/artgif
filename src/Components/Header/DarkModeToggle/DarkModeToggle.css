@@ -51,7 +51,8 @@
 }
 
 .dark-toggle .dark-toggle__bulb {
-  max-height: 2em;
+  width: 2em;
+  height: 2em;
 }
 
 .dark-toggle .dark-toggle__bulb > * {
