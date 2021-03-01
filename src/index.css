@@ -95,6 +95,7 @@ input[type='submit'] {
   background-color: transparent;
   border: 1px solid var(--foreground-color);
   border-radius: 0.2rem;
+  color: var(--foreground-color);
 }
 
 .button-group {

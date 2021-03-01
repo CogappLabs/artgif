@@ -9,8 +9,9 @@ export const OutputPanel: FunctionComponent<OutputPanelProps> = () => {
   const lightboxImages = useTypedSelector(({ artworks }) => artworks.lightbox);
 
   return (
-    <>
-      <GifShot images={lightboxImages}/>
-      <Credits images={lightboxImages}/>
-    </>);
+    <div className="stack">
+      <GifShot images={lightboxImages} />
+      <Credits images={lightboxImages} />
+    </div>
+  );
 };

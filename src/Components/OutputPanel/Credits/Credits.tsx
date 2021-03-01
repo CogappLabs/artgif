@@ -1,29 +1,38 @@
 import React from 'react';
-import {ImageDescriptor } from '../../../Store/artworks';
+import { ImageDescriptor } from '../../../Store/artworks';
 import './Credits.css';
 export interface CreditsProps {
-    images: ImageDescriptor[];
+  images: ImageDescriptor[];
 }
 
 export type CreditsFC = React.FC<CreditsProps>;
 
-export const Credits: CreditsFC = ({ images, ...props }) => {
+interface KeyedImageDescriptors {
+  [key: string]: ImageDescriptor;
+}
 
-    var distinct:any = [];
+export const Credits: CreditsFC = ({ images }) => {
+  // Build an object of unique objects.
+  const uniqueImages = images.reduce<KeyedImageDescriptors>((prev, current) => {
+    if (!current.objectID) return prev;
+    return { ...prev, [current.objectID]: current };
+  }, {});
 
-    return (
+  return (
     <div className="credits">
-        <div><h2 className="panel__title">Artwork credits</h2>
-            {images.map((artwork) => {
-                if (!distinct.includes(artwork.objectID)) {
-                    distinct.push(artwork.objectID);
-                    let url = 'https://www.artic.edu/artworks/' + artwork.objectID;
-                    return <p><a href={url} target="_new">{artwork.caption}</a></p>;
-                }
-                return '';
-            })}
-
-        </div>
+      <h2 className="panel__title">Artwork credits</h2>
+      <br />
+      <ul className="stack">
+        {Object.entries(uniqueImages).map(([objectId, image]) => {
+          return (
+            <li key={objectId}>
+              <a target="_blank" rel="noreferrer" href={`https://www.artic.edu/artworks/${objectId}`}>
+                {image.caption}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
