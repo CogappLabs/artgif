@@ -32,7 +32,7 @@ const Viewer = ({ tiles }: ComplexTileSource) => {
         viewer.viewport.fitBoundsWithConstraints(viewer.viewport.imageToViewportRectangle(selectedArtwork.crop));
       }
     }
-  }, [isReady]);
+  });
 
   const addHandler = (currentFrame: ImageDescriptor | undefined) => {
     // TODO this could all work off selectedArtwork?

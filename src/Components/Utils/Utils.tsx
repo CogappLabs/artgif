@@ -7,3 +7,5 @@ export interface VisuallyHiddenProps {
 export const VisuallyHidden: FunctionComponent<VisuallyHiddenProps> = ({ text }) => (
   <span className="visually-hidden">{text}</span>
 );
+
+export const FormGroup: FunctionComponent = ({ children }) => <div className="form-group">{children}</div>;

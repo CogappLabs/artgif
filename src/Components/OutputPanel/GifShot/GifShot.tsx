@@ -15,18 +15,15 @@ export interface GifShotProps {
 
 export type GifShotFC = React.FC<GifShotProps>;
 
-export const GifShot: GifShotFC = ({ images, ...props }) => {
+export const GifShot: GifShotFC = React.memo(({ images, ...props }) => {
   const [imageString, setImageString] = useState<string | undefined>(undefined);
-  let [interval, setInterval] = useState<number>(0.5);
 
   gifshot.createGIF(
     {
       images: images.map((image) => image.imageUrl),
       width: props.width ?? 200,
       height: props.height ?? 200,
-      interval: props.interval ?? interval,
-      frameDuration: props.frameDuration ?? 1,
-      numFrames: props.numFrames ?? 10,
+      frameDuration: props.frameDuration ?? 5,
     },
     (params: gifshot.GifShotCallbackParam) => {
       if (!params.error && params.image) {
@@ -35,18 +32,9 @@ export const GifShot: GifShotFC = ({ images, ...props }) => {
     }
   );
 
-  const changeSpeed = (increment: number) => {
-    if (interval > 0.05) setInterval(interval + increment);
-    console.log('interval', interval)
-  }
-
   return (
     <div className="gifshot">
-      <img src={imageString} alt=""/>
-      <div>
-        <button onClick={() => changeSpeed(-0.05)}>Faster</button>
-        <button onClick={() => changeSpeed(+0.05)}>Slower</button>
-      </div>
+      <img src={imageString} alt="" />
     </div>
   );
-};
+});

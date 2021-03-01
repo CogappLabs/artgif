@@ -56,7 +56,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
 
   useEffect(() => {
     getImages();
-  }, []);
+  });
 
   const getRandomImages = async () => {
     setQuery('');
