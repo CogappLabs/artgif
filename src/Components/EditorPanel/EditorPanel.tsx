@@ -25,14 +25,10 @@ const Viewer = ({ tiles }: ComplexTileSource) => {
   const [image, setImage] = useState(tiles[0].tileSource.slice(0, -10) + '/full/!200,200/0/default.jpg');
 
   useEffect(() => {
-    if (isReady) {
-      // console.log('ready');
-      if (selectedArtwork !== undefined && selectedArtwork.crop !== undefined) {
-        // setCrop(selectedArtwork.crop);
-        viewer.viewport.fitBoundsWithConstraints(viewer.viewport.imageToViewportRectangle(selectedArtwork.crop));
-      }
+    if (isReady && selectedArtwork?.crop !== undefined) {
+      viewer.viewport.fitBoundsWithConstraints(viewer.viewport.imageToViewportRectangle(selectedArtwork.crop));
     }
-  });
+  }, [isReady, selectedArtwork, viewer]);
 
   const addHandler = (currentFrame: ImageDescriptor | undefined) => {
     // TODO this could all work off selectedArtwork?

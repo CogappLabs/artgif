@@ -56,7 +56,7 @@ export const ArtworkPanel: FunctionComponent<ArtworkPanelProps> = () => {
 
   useEffect(() => {
     getImages();
-  });
+  }, []); // eslint-disable-line
 
   const getRandomImages = async () => {
     setQuery('');
